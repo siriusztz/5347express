@@ -19,7 +19,9 @@ router.get("/overall/historyrank",overallControllers.historyRank)         //历�
 router.get("/overall/statistic",overallControllers.numBytimeByuser)
 
 //individual
+router.get('/indiv/allarticle',indivController.queryAllArticle)  //得到所有titles
 router.get('/indiv/select',indivController.selectArticle)
+router.get('/indiv/wiki/:name',indivController.queryIfnewArticle)
 router.get('/indiv/article/:name',indivController.titleAndrevision)    //前两个数据
 router.get("/indiv/topfive/:name",indivController.revisenumbyEditor) //前五名的修改量
 router.get("/indiv/statistic/:name",indivController.numBytimeByuser)     //两个图的数据

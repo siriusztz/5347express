@@ -17,6 +17,7 @@
     "http-errors": "~1.6.2",
     "mongoose": "^5.0.15",
     "morgan": "~1.9.0",
+    "request": "^2.87.0",
     "session-file-store": "^1.2.0"
   },
   "devDependencies": {
