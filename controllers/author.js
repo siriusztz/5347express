@@ -5,7 +5,7 @@ var async = require("async");
 var Revision = mongoose.model('Revision');
 var Editor = mongoose.model('Editor')
 
-
+//select用户
 module.exports.selectAuthor = function (req, res, next) {
     var name = req.query.name
     console.log(name)
@@ -21,6 +21,7 @@ module.exports.selectAuthor = function (req, res, next) {
         });
 }
 
+//某个作者的修改
 module.exports.revisionByAuthor = function (req, res, next) {
     var name = req.params.name
     console.log(name)

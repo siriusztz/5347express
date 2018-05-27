@@ -35,6 +35,7 @@ module.exports.reviseUserRank = function (req, res, next) {
     )
 }
 
+//根据创建历史排序·
 module.exports.historyRank = function (req, res, next) {
     Revision.aggregate(
         [

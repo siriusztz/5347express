@@ -39,22 +39,18 @@ module.exports.selectArticle = function (req, res, next) {
         });
 }
 
+//查询是否有新的文章可以拉取，如果有存入数据，同时修改revision和editor两个collection
 module.exports.queryIfnewArticle = function (req, res, next) {
     name = req.params.name
-   // a=moment()
-
+ 
     Revision.findOne({ 'title': name, 'timestamp': { $gt: '2017-01-01T06:20:16Z' } }, { 'timestamp': 1, '_id': 0 })
         .sort({ timestamp: -1 })
         .exec(function (err, data) {
             var timequery = util.format("&rvstart=%s&rvend=%sZ", data.timestamp, moment().format('YYYY-MM-DDTHH:mm:ss'))
-
             var url = util.format("%s%s&titles=%s", 'https://en.wikipedia.org/w/api.php?action=query&prop=revisions&rvprop=timestamp|user&format=json&rvdir=newer&rvlimit=max', timequery, name)
-           // console.log(url)
+
             request(url, function (error, response, body) {
                 if (!error && response.statusCode == 200) {
-
-                    // b=moment()
-                    // console.log(b.diff(a))
 
                     var jsonRes = JSON.parse(body)
                     for (i in jsonRes.query.pages) {
@@ -105,10 +101,7 @@ module.exports.queryIfnewArticle = function (req, res, next) {
                             }, function (err) {
                                 if (err) console.log(err.message);
                                 console.log("fetch revision:"+ name+", num:"+ items.length)
-
-                                // c=moment()
-                                // console.log(c.diff(b))
-
+                                //返回拉取的个数
                                 res.send({ num: items.length })
                             });
 
@@ -133,6 +126,7 @@ module.exports.titleAndrevision = function (req, res, next) {
 
 }
 
+//查询修改量前五的用户
 module.exports.revisenumbyEditor = function (req, res, next) {
     var name = req.params.name
     Revision.aggregate(
