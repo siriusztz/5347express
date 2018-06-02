@@ -44,7 +44,7 @@ mongoose.connect('mongodb://localhost:27017/test', function (err) {
     }
 });
 
-//因为在前端过滤了，所以后端暂时不用，若要严格安全要求应该双重过滤
+//因为在前端过滤了，所以后端暂时不用
 // app.use(function (req, res, next) {
 //     if (!req.session.loginUser) {
 //         if (req.url === '/user/signin' || req.url === '/user/signup') {

@@ -8,7 +8,7 @@ var Revision = mongoose.model('Revision');
 var Editor = mongoose.model('Editor')
 var Article = mongoose.model('Article')
 
-
+//得到所有的文章的名字
 module.exports.queryAllArticle = function (req, res, next) { 
     var list = new Array
     Article.find()
@@ -21,6 +21,7 @@ module.exports.queryAllArticle = function (req, res, next) {
         });
 }
 
+//select远程调用
 module.exports.selectArticle = function (req, res, next) {
     var name = ''
     if (req.query.name != undefined) {
@@ -114,6 +115,7 @@ module.exports.queryIfnewArticle = function (req, res, next) {
         });
 }
 
+//查询titile和修改次数
 module.exports.titleAndrevision = function (req, res, next) {
     name = req.params.name
 
@@ -147,7 +149,7 @@ module.exports.revisenumbyEditor = function (req, res, next) {
     )
 }
 
-
+//前两个图调用
 module.exports.numBytimeByuser = function (req, res, next) {
 
     var name = req.params.name
@@ -217,6 +219,7 @@ module.exports.numBytimeByuser = function (req, res, next) {
 
 }
 
+//第三个图用，查询前5的用户的修改数据
 module.exports.topFiveBytimeByuser = function (req, res, next) {
     var list = req.query
     var users = new Array

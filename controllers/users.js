@@ -3,7 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var User = mongoose.model('User');
 
-//post user sign up
+//post user sign up注册
 module.exports.userSignup = function (req, res, next) {
     var student = new User({
         firstname: req.body.firstname,

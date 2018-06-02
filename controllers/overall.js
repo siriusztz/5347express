@@ -49,11 +49,10 @@ module.exports.historyRank = function (req, res, next) {
     )
 }
 
+//两个chart需要的数据
 module.exports.numBytimeByuser = function (req, res, next) {
-
     var a = moment()
     async.waterfall([
-        //找到最小年
         function (callback) {
             callback(null, '2001')
         },
@@ -78,7 +77,6 @@ module.exports.numBytimeByuser = function (req, res, next) {
                 ],
                 function (err, data) {
                     if (err) console.log(err)
-
                     callback(null, data)
                 }
             )
@@ -88,6 +86,5 @@ module.exports.numBytimeByuser = function (req, res, next) {
         if (err) console.log(err.message);
         res.send(result)
     });
-
 
 }

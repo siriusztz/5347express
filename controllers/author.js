@@ -33,7 +33,6 @@ module.exports.revisionByAuthor = function (req, res, next) {
         ],
         function (err, data) {
             if (err) console.log(err)
-            console.log(data)
             res.send(data)
         }
     )
