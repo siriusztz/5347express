@@ -8,6 +8,8 @@ var Revision = mongoose.model('Revision');
 var Editor = mongoose.model('Editor')
 var Article = mongoose.model('Article')
 
+const folder='Dataset1'
+
 //post 录入 作者
 module.exports.inputEditor = function (req, res, next) {
     //读两个注册用户的文件
@@ -60,20 +62,44 @@ module.exports.inputEditor = function (req, res, next) {
             res.send('inputing editor has been done')
         }
     });
+    
+}
 
+//录入文章
+module.exports.inputArticle = function (req, res, next) {
+    filepath = path.join(__dirname, "../public/Dataset/Dataset2")
+
+    console.log(filepath)
+
+    files = fs.readdirSync(filepath);
+
+    for (var i = 0; i < files.length; i++) {
+        var n = files[i].replace(".json", "")
+        var article = new Article({
+            name: n,
+        });
+        article.save(function (err) {
+            if (err != null) {
+                res.send('one failed!')
+            }
+        });
+    }
+
+    res.send("num" + files.length)
 }
 
 //post 录入修改
 module.exports.inputRevision = function (req, res, next) {
     console.log(moment().format())
-    filepath = path.join(__dirname, "../public/Dataset/revisions")
+    filepath = path.join(__dirname, "../public/Dataset/Dataset2")
 
     files = fs.readdirSync(filepath);
 
-    async.eachLimit(files, 4, function (filename, callback) {
+    async.eachSeries(files, function (filename, callback) {
 
         fs.readFile(path.join(filepath, filename), 'utf8', function (err, data) {
             if (err) console.log(err);
+            //console.log(data.length,filepath+filename)
             var test = JSON.parse(data);
 
             console.log(test.length)
@@ -130,24 +156,4 @@ module.exports.inputRevision = function (req, res, next) {
     })
 
     res.send('successful')
-}
-
-//录入文章
-module.exports.inputArticle = function (req, res, next) {
-    filepath = path.join(__dirname, "../public/Dataset/revisions")
-    files = fs.readdirSync(filepath);
-
-    for (var i = 0; i < files.length; i++) {
-        var n = files[i].replace(".json", "")
-        var article = new Article({
-            name: n,
-        });
-        article.save(function (err) {
-            if (err != null) {
-                res.send('one failed!')
-            }
-        });
-    }
-
-    res.send("num" + files.length)
 }

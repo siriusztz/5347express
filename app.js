@@ -36,7 +36,7 @@ app.use(session({
 }));
 
 //connect database
-mongoose.connect('mongodb://localhost:27017/test', function (err) {
+mongoose.connect('mongodb://localhost:27017/test3', function (err) {
     if (err) {
         console.log(err);
     } else {

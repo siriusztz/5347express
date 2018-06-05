@@ -6,11 +6,10 @@ var indivController=require("../controllers/individual")
 var authorControler=require("../controllers/author")
 var router = express.Router();
 
-// router.get('/', userControllers.getSingnupPage)
 //导入
+router.post('/inputArticle',indexControllers.inputArticle)
 router.post('/editor',indexControllers.inputEditor)
 router.post('/revision',indexControllers.inputRevision)
-router.post('/inputArticle',indexControllers.inputArticle)
 
 //overall
 router.get('/overall/revisenumrank',overallControllers.reviseNumRank)     //每篇修改量的排序
