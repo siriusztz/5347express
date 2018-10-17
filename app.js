@@ -1,4 +1,4 @@
-var createError = require('http-errors');
+ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var ejs = require('ejs');
@@ -36,7 +36,11 @@ app.use(session({
 }));
 
 //connect database
-mongoose.connect('mongodb://localhost:27017/test3', function (err) {
+var dbURL = 'mongodb://localhost:27017/test';
+//mongodb这个名字是 在--link=aaa:bbb时的名字 即bbb(aaa是容器名字，bbb是对内名字)
+// var dbURL = 'mongodb://mongodb/test';    
+
+mongoose.connect(dbURL, function (err) {
     if (err) {
         console.log(err);
     } else {

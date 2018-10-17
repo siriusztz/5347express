@@ -10,6 +10,7 @@ var Article = mongoose.model('Article')
 
 //得到所有的文章的名字
 module.exports.queryAllArticle = function (req, res, next) { 
+
     var list = new Array
     Article.find()
         .sort({ 'name': 1 })
@@ -23,6 +24,9 @@ module.exports.queryAllArticle = function (req, res, next) {
 
 //select
 module.exports.selectArticle = function (req, res, next) {
+
+    console.log(req.url)
+    
     var name = ''
     if (req.query.name != undefined) {
         name = req.query.name
@@ -195,7 +199,7 @@ module.exports.numBytimeByuser = function (req, res, next) {
                             }
                         }
 
-                        delete data[i].users
+                        delete data[i].users    //删除json对象元素
                         data[i]['users'] = users
                     }
 
